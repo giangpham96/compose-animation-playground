@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -74,7 +76,9 @@ fun RestaurantListScreen(viewModel: RestaurantListViewModel = viewModel(), modif
     }
 
     ConstraintLayout(
-        modifier = modifier.fillMaxSize().background(MaterialTheme.colors.surfaceMain)
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.surfaceMain)
     ) {
 
         val (expandedHeader, mapIcon, progress) = createRefs()
@@ -129,11 +133,11 @@ fun RestaurantListScreen(viewModel: RestaurantListViewModel = viewModel(), modif
         }
         MapIcon(
             modifier = Modifier
-                .clickable { viewModel.reload() }
                 .constrainAs(mapIcon) {
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end)
+                    top.linkTo(parent.top, 8.dp)
+                    end.linkTo(parent.end, 16.dp)
                 },
+            onClick = { viewModel.reload() }
         )
     }
 }
@@ -151,22 +155,25 @@ private fun ExpandedHeader(modifier: Modifier) {
 }
 
 @Composable
-private fun MapIcon(modifier: Modifier) {
-    Icon(
-        painter = painterResource(id = R.drawable.ic_map),
-        contentDescription = null,
-        modifier = Modifier
-            .padding(start = 8.dp, top = 8.dp, end = 16.dp)
-            .width(40.dp)
-            .height(40.dp)
-            .background(
-                color = MaterialTheme.colors.buttonIconic,
-                shape = CircleShape
-            )
-            .padding(10.dp)
-            .then(modifier),
-        tint = MaterialTheme.colors.iconPrimary
-    )
+private fun MapIcon(modifier: Modifier, onClick: () -> Unit) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_map),
+            contentDescription = null,
+            modifier = modifier
+                .width(40.dp)
+                .height(40.dp)
+                .background(
+                    color = MaterialTheme.colors.buttonIconic,
+                    shape = CircleShape
+                )
+                .padding(10.dp),
+            tint = MaterialTheme.colors.iconPrimary
+        )
+    }
 }
 
 @Composable
