@@ -8,6 +8,9 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -39,16 +42,19 @@ import la.me.leo.composeanimation.ui.theme.surface8dp
 fun BottomTabScreen() {
     val navController = rememberAnimatedNavController()
     Scaffold(
-        bottomBar = { BottomNavigationBar(navController = navController) }
+        bottomBar = { BottomNavigationBar(navController = navController) },
+        modifier = Modifier.navigationBarsPadding()
     ) {
-        NavigationGraph(navController = navController)
+        NavigationGraph(navController = navController, contentPadding = it)
     }
 }
 
 @ExperimentalAnimationApi
 @Composable
-private fun NavigationGraph(navController: NavHostController) {
-    AnimatedNavHost(navController, startDestination = NavigationItem.Discovery.route) {
+private fun NavigationGraph(navController: NavHostController, contentPadding: PaddingValues) {
+    AnimatedNavHost(navController,
+        startDestination = NavigationItem.Discovery.route,
+        modifier = Modifier.padding(contentPadding)) {
         composable(
             route = NavigationItem.Discovery.route,
             enterTransition = { EnterTransition.None },

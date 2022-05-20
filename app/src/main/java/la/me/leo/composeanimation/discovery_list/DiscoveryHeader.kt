@@ -39,7 +39,7 @@ import kotlin.math.acos
 import kotlin.math.sqrt
 
 @Composable
-fun DiscoveryHeader(modifier: Modifier, scrollY: Float) {
+fun DiscoveryHeader(modifier: Modifier, scrollY: Float, onSChanged: (Float) -> Unit) {
     val t = LocalDensity.current.run { 24.dp.toPx() }
     val p = LocalDensity.current.run { 32.dp.toPx() }
     var s by remember { mutableStateOf(0f) }
@@ -73,6 +73,7 @@ fun DiscoveryHeader(modifier: Modifier, scrollY: Float) {
                 }
                 .onGloballyPositioned {
                     s = it.size.height.toFloat()
+                    onSChanged(it.size.height.toFloat())
                     curveHeight = it.size.height + (4.5f - sqrt(20f)) * it.size.width
                 }
                 .graphicsLayer {

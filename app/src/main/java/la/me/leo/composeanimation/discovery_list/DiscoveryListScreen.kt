@@ -1,5 +1,6 @@
 package la.me.leo.composeanimation.discovery_list
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -39,13 +40,14 @@ fun DiscoveryListScreen(viewModel: DiscoveryListViewModel = viewModel(), modifie
     var headerHeight by remember { mutableStateOf(0) }
 
     val listState = rememberLazyListState()
-    val hMinusS = LocalDensity.current.run { (56 + 16 + 72).dp.toPx() }
 
     val scrollY: Float by remember {
         derivedStateOf {
+            Log.d("First visible", listState.firstVisibleItemIndex.toString())
             if (listState.firstVisibleItemIndex > 0) {
                 p + s + t + e
             } else {
+                Log.d("Scroll", listState.firstVisibleItemScrollOffset.toString())
                 listState.firstVisibleItemScrollOffset.toFloat()
             }
         }
@@ -64,10 +66,10 @@ fun DiscoveryListScreen(viewModel: DiscoveryListViewModel = viewModel(), modifie
                     width = Dimension.fillToConstraints
                 }
                 .onGloballyPositioned {
-                    s = it.size.height - hMinusS
                     headerHeight = it.size.height
                 },
-            scrollY = scrollY
+            scrollY = scrollY,
+            onSChanged = { s = it }
         )
         DiscoveryList(
             state = listState,

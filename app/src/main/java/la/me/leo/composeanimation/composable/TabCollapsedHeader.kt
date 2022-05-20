@@ -1,11 +1,18 @@
 package la.me.leo.composeanimation.composable
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -28,10 +35,11 @@ import la.me.leo.composeanimation.ui.theme.textPrimary
 @Composable
 fun CollapsedHeaderContent(progress: Float, modifier: Modifier) {
     Column(
-        modifier = Modifier
-            .then(modifier)
+        modifier = modifier
             .padding(end = 56.dp, start = 16.dp)
             .fillMaxWidth()
+            .displayCutoutPadding()
+            .statusBarsPadding()
             .height(56.dp),
         verticalArrangement = Arrangement.Center
     ) {
@@ -82,16 +90,21 @@ fun CollapsedHeaderBackground(progress: Float, modifier: Modifier) {
     Surface(
         elevation = 4.dp,
         color = MaterialTheme.colors.surface4dp,
-        modifier = Modifier
-            .then(modifier)
+        modifier = modifier
             .fillMaxWidth()
-            .height(56.dp)
             .graphicsLayer {
                 alpha = getComponentProgress(progress, 0.15f, 0.25f)
                 val translationYProgress = getComponentProgress(progress, 0.15f, 1f)
                 translationY = translationY0 * (1 - translationYProgress)
             }
-    ) {}
+    ) {
+        Box(
+            modifier = Modifier
+            .displayCutoutPadding()
+            .statusBarsPadding()
+            .height(56.dp)
+        )
+    }
 }
 
 private fun getComponentProgress(progress: Float, start: Float, end: Float): Float {

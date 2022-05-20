@@ -7,9 +7,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -93,7 +95,7 @@ fun RestaurantListScreen(viewModel: RestaurantListViewModel = viewModel(), modif
                     collapsingDistance = layoutCoordinates.size.height - collapseHeight
                 }
                 .graphicsLayer {
-                    translationY = -collapsingDistance * scrollProgress * 0.6f
+                    translationY = -collapsingDistance * scrollProgress
                     alpha = 1 - scrollProgress
                 }
         )
@@ -131,6 +133,8 @@ fun RestaurantListScreen(viewModel: RestaurantListViewModel = viewModel(), modif
         }
         MapIcon(
             modifier = Modifier
+                .displayCutoutPadding()
+                .statusBarsPadding()
                 .constrainAs(mapIcon) {
                     top.linkTo(parent.top, 8.dp)
                     end.linkTo(parent.end, 16.dp)
