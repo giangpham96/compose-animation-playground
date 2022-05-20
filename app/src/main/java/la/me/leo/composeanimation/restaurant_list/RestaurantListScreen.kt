@@ -157,13 +157,13 @@ private fun MapIcon(modifier: Modifier, onClick: () -> Unit) {
     IconButton(
         onClick = onClick,
         modifier = modifier
+            .width(40.dp)
+            .height(40.dp)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_map),
             contentDescription = null,
             modifier = modifier
-                .width(40.dp)
-                .height(40.dp)
                 .background(
                     color = MaterialTheme.colors.buttonIconic,
                     shape = CircleShape
