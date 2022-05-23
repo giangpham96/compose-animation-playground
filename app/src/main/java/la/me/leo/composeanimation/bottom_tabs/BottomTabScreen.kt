@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -34,6 +35,7 @@ import la.me.leo.composeanimation.R
 import la.me.leo.composeanimation.common.circularReveal
 import la.me.leo.composeanimation.discovery_list.DiscoveryListScreen
 import la.me.leo.composeanimation.restaurant_list.RestaurantListScreen
+import la.me.leo.composeanimation.ui.theme.Wolt
 import la.me.leo.composeanimation.ui.theme.iconPrimary
 import la.me.leo.composeanimation.ui.theme.surface8dp
 
@@ -56,33 +58,27 @@ private fun NavigationGraph(navController: NavHostController, contentPadding: Pa
         navController = navController,
         startDestination = NavigationItem.Discovery.route,
         modifier = Modifier.padding(contentPadding)) {
-        composable(
-            route = NavigationItem.Discovery.route,
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None }
-        ) {
-            TabCircularRevealContent(0.25f) {
-                DiscoveryListScreen(modifier = it)
-            }
+        tab(navItem = NavigationItem.Discovery, offsetX = 0.25f) {
+            DiscoveryListScreen(modifier = it)
         }
-        composable(
-            route = NavigationItem.Restaurant.route,
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None }
-        ) {
-            TabCircularRevealContent(0.75f) {
-                RestaurantListScreen(modifier = it)
-            }
+        tab(navItem = NavigationItem.Restaurant, offsetX = 0.75f) {
+            RestaurantListScreen(modifier = it)
         }
     }
 }
 
 @ExperimentalAnimationApi
+private fun NavGraphBuilder.tab(navItem: NavigationItem, offsetX: Float, content: @Composable (Modifier) -> Unit) {
+    composable(
+        route = navItem.route,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }
+    ) { TabCircularRevealContent(offsetX, content) }
+}
+
+@ExperimentalAnimationApi
 @Composable
-private fun AnimatedVisibilityScope.TabCircularRevealContent(
-    offsetX: Float,
-    content: @Composable (modifier: Modifier) -> Unit,
-) {
+private fun AnimatedVisibilityScope.TabCircularRevealContent(offsetX: Float, content: @Composable (Modifier) -> Unit) {
     val radiusProgress by transition.animateFloat(
         label = "circular reveal",
         transitionSpec = { tween(300, 0, FastOutSlowInEasing) }
@@ -135,7 +131,7 @@ private fun BottomNavigationBar(navController: NavHostController) {
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = { Text(text = item.title) },
-                selectedContentColor = MaterialTheme.colors.iconPrimary,
+                selectedContentColor = Wolt,
                 unselectedContentColor = MaterialTheme.colors.iconPrimary.copy(alpha = 0.4f),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
