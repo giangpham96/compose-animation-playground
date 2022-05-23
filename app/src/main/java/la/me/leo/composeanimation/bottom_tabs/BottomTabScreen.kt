@@ -52,7 +52,8 @@ fun BottomTabScreen() {
 @ExperimentalAnimationApi
 @Composable
 private fun NavigationGraph(navController: NavHostController, contentPadding: PaddingValues) {
-    AnimatedNavHost(navController,
+    AnimatedNavHost(
+        navController = navController,
         startDestination = NavigationItem.Discovery.route,
         modifier = Modifier.padding(contentPadding)) {
         composable(
@@ -124,17 +125,13 @@ private fun AnimatedVisibilityScope.TabCircularRevealContent(
 
 @Composable
 private fun BottomNavigationBar(navController: NavHostController) {
-    val items = listOf(
-        NavigationItem.Discovery,
-        NavigationItem.Restaurant
-    )
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.surface8dp,
         contentColor = MaterialTheme.colors.iconPrimary
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
-        items.forEach { item ->
+        NavigationItem.values().forEach { item ->
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = { Text(text = item.title) },
@@ -158,7 +155,7 @@ private fun BottomNavigationBar(navController: NavHostController) {
     }
 }
 
-private sealed class NavigationItem(val route: String, val icon: Int, val title: String) {
-    object Discovery : NavigationItem("discovery", R.drawable.ic_home, "Discovery")
-    object Restaurant : NavigationItem("restaurants", R.drawable.ic_home, "Restaurants")
+private enum class NavigationItem(val route: String, val icon: Int, val title: String) {
+    Discovery("discovery", R.drawable.ic_tab_discovery, "Discovery"),
+    Restaurant("restaurants", R.drawable.ic_tab_delivery, "Restaurants")
 }
