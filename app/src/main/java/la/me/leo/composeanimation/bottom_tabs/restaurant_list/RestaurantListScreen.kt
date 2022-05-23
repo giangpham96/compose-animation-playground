@@ -1,4 +1,4 @@
-package la.me.leo.composeanimation.restaurant_list
+package la.me.leo.composeanimation.bottom_tabs.restaurant_list
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -39,11 +39,11 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import la.me.leo.composeanimation.R
-import la.me.leo.composeanimation.composable.AddressBar
-import la.me.leo.composeanimation.composable.CollapsedHeaderBackground
-import la.me.leo.composeanimation.composable.CollapsedHeaderContent
-import la.me.leo.composeanimation.composable.VenueLarge
-import la.me.leo.composeanimation.composable.VenueLargeItem
+import la.me.leo.composeanimation.bottom_tabs.composable.AddressBar
+import la.me.leo.composeanimation.bottom_tabs.composable.CollapsedHeaderBackground
+import la.me.leo.composeanimation.bottom_tabs.composable.CollapsedHeaderContent
+import la.me.leo.composeanimation.bottom_tabs.composable.VenueLarge
+import la.me.leo.composeanimation.bottom_tabs.composable.VenueLargeItem
 import la.me.leo.composeanimation.ui.theme.Heading4
 import la.me.leo.composeanimation.ui.theme.Wolt
 import la.me.leo.composeanimation.ui.theme.buttonIconic

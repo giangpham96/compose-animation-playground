@@ -32,8 +32,8 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import la.me.leo.composeanimation.R
 import la.me.leo.composeanimation.common.circularReveal
-import la.me.leo.composeanimation.discovery_list.DiscoveryListScreen
-import la.me.leo.composeanimation.restaurant_list.RestaurantListScreen
+import la.me.leo.composeanimation.bottom_tabs.discovery_list.DiscoveryListScreen
+import la.me.leo.composeanimation.bottom_tabs.restaurant_list.RestaurantListScreen
 import la.me.leo.composeanimation.ui.theme.Wolt
 import la.me.leo.composeanimation.ui.theme.iconPrimary
 import la.me.leo.composeanimation.ui.theme.surface8dp

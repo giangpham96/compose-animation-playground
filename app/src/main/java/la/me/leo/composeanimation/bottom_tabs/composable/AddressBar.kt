@@ -1,4 +1,4 @@
-package la.me.leo.composeanimation.composable
+package la.me.leo.composeanimation.bottom_tabs.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row

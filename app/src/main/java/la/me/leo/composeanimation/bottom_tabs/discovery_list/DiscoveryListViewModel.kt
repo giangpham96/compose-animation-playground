@@ -1,8 +1,8 @@
-package la.me.leo.composeanimation.discovery_list
+package la.me.leo.composeanimation.bottom_tabs.discovery_list
 
 import la.me.leo.composeanimation.base.BaseViewModel
 import la.me.leo.composeanimation.base.BaseViewState
-import la.me.leo.composeanimation.composable.VenueLarge
+import la.me.leo.composeanimation.bottom_tabs.composable.VenueLarge
 import java.util.UUID
 
 class DiscoveryListViewModel : BaseViewModel<DiscoveryListState>(

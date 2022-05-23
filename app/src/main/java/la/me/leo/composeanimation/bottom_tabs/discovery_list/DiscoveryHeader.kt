@@ -1,4 +1,4 @@
-package la.me.leo.composeanimation.discovery_list
+package la.me.leo.composeanimation.bottom_tabs.discovery_list
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -30,7 +30,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.atMost
 import la.me.leo.composeanimation.R
-import la.me.leo.composeanimation.composable.AddressBar
+import la.me.leo.composeanimation.bottom_tabs.composable.AddressBar
 import la.me.leo.composeanimation.ui.theme.Body3
 import la.me.leo.composeanimation.ui.theme.Heading4
 import la.me.leo.composeanimation.ui.theme.buttonIconicSelected

@@ -1,11 +1,11 @@
-package la.me.leo.composeanimation.restaurant_list
+package la.me.leo.composeanimation.bottom_tabs.restaurant_list
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import la.me.leo.composeanimation.base.BaseViewModel
 import la.me.leo.composeanimation.base.BaseViewState
-import la.me.leo.composeanimation.composable.VenueLarge
+import la.me.leo.composeanimation.bottom_tabs.composable.VenueLarge
 import java.util.UUID
 
 class RestaurantListViewModel : BaseViewModel<RestaurantListState>(

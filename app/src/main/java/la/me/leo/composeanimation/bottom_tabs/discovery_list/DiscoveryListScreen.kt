@@ -1,4 +1,4 @@
-package la.me.leo.composeanimation.discovery_list
+package la.me.leo.composeanimation.bottom_tabs.discovery_list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
-import la.me.leo.composeanimation.composable.CollapsedHeaderBackground
-import la.me.leo.composeanimation.composable.CollapsedHeaderContent
-import la.me.leo.composeanimation.composable.VenueLarge
-import la.me.leo.composeanimation.composable.VenueLargeItem
+import la.me.leo.composeanimation.bottom_tabs.composable.CollapsedHeaderBackground
+import la.me.leo.composeanimation.bottom_tabs.composable.CollapsedHeaderContent
+import la.me.leo.composeanimation.bottom_tabs.composable.VenueLarge
+import la.me.leo.composeanimation.bottom_tabs.composable.VenueLargeItem
 import la.me.leo.composeanimation.ui.theme.surfaceMain
 
 @Composable

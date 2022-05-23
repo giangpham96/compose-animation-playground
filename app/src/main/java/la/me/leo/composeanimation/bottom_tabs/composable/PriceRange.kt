@@ -1,4 +1,4 @@
-package la.me.leo.composeanimation.composable
+package la.me.leo.composeanimation.bottom_tabs.composable
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
