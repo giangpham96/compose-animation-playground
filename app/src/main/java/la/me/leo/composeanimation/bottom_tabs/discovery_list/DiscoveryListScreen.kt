@@ -1,5 +1,6 @@
 package la.me.leo.composeanimation.bottom_tabs.discovery_list
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -42,10 +43,11 @@ fun DiscoveryListScreen(viewModel: DiscoveryListViewModel = viewModel(), modifie
 
     val scrollY: Float by remember {
         derivedStateOf {
-            if (listState.firstVisibleItemIndex > 0) {
-                p + s + t + e
-            } else {
-                listState.firstVisibleItemScrollOffset.toFloat()
+            val firstVisibleItem = listState.layoutInfo.visibleItemsInfo.firstOrNull()
+            when {
+                firstVisibleItem == null -> 0f
+                firstVisibleItem.index == 0 -> -firstVisibleItem.offset.toFloat()
+                else -> p + s + t + e
             }
         }
     }
