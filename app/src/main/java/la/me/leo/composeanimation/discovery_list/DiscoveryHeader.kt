@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.TransformOrigin
@@ -31,7 +33,6 @@ import la.me.leo.composeanimation.R
 import la.me.leo.composeanimation.composable.AddressBar
 import la.me.leo.composeanimation.ui.theme.Body3
 import la.me.leo.composeanimation.ui.theme.Heading4
-import la.me.leo.composeanimation.ui.theme.Orange
 import la.me.leo.composeanimation.ui.theme.buttonIconicSelected
 import la.me.leo.composeanimation.ui.theme.surfaceMain
 import la.me.leo.composeanimation.ui.theme.textPrimaryInverse
@@ -44,8 +45,15 @@ fun DiscoveryHeader(modifier: Modifier, scrollY: Float, onSChanged: (Float) -> U
     val p = LocalDensity.current.run { 32.dp.toPx() }
     var s by remember { mutableStateOf(0f) }
     var curveHeight by remember { mutableStateOf(0f) }
-    val bgAlpha = 1 - getComponentProgress(scrollY, p + s, p + s + t - LocalDensity.current.run { 8.dp.toPx() })
-    ConstraintLayout(modifier.background(Orange.copy(alpha = bgAlpha))) {
+    val bgProgress = getComponentProgress(scrollY, p + s, p + s + t - LocalDensity.current.run { 8.dp.toPx() })
+    val bgAlpha = ((1 - bgProgress) * 255).toInt()
+    ConstraintLayout(modifier.background(
+        brush = Brush.verticalGradient(
+            0f to Color(0xF8, 0x68, 0x00, bgAlpha),
+            0.7656f to Color(0xF0, 0x9E, 0x00, bgAlpha),
+            1f to Color(0xFF, 0xB8, 0x00, bgAlpha)
+        )
+    )) {
         val (addressBar, cityState, curve) = createRefs()
         AddressBar(
             tintColor = MaterialTheme.colors.textPrimaryInverse,
@@ -58,7 +66,7 @@ fun DiscoveryHeader(modifier: Modifier, scrollY: Float, onSChanged: (Float) -> U
                 }
                 .graphicsLayer {
                     val progress = getComponentProgress(scrollY, p + s, p + s + t - 8.dp.toPx())
-                    translationY = - (t - 8.dp.toPx()) * progress * 0.6f
+                    translationY = -(t - 8.dp.toPx()) * progress * 0.6f
                     alpha = 1 - progress
                 }
         )
