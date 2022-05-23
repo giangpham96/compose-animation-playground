@@ -18,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -57,13 +58,10 @@ private fun NavigationGraph(navController: NavHostController, contentPadding: Pa
     AnimatedNavHost(
         navController = navController,
         startDestination = NavigationItem.Discovery.route,
-        modifier = Modifier.padding(contentPadding)) {
-        tab(navItem = NavigationItem.Discovery, offsetX = 0.25f) {
-            DiscoveryListScreen(modifier = it)
-        }
-        tab(navItem = NavigationItem.Restaurant, offsetX = 0.75f) {
-            RestaurantListScreen(modifier = it)
-        }
+        modifier = Modifier.padding(contentPadding)
+    ) {
+        tab(navItem = NavigationItem.Discovery, offsetX = 0.25f) { DiscoveryListScreen(modifier = it) }
+        tab(navItem = NavigationItem.Restaurant, offsetX = 0.75f) { RestaurantListScreen(modifier = it) }
     }
 }
 
@@ -79,31 +77,23 @@ private fun NavGraphBuilder.tab(navItem: NavigationItem, offsetX: Float, content
 @ExperimentalAnimationApi
 @Composable
 private fun AnimatedVisibilityScope.TabCircularRevealContent(offsetX: Float, content: @Composable (Modifier) -> Unit) {
-    val radiusProgress by transition.animateFloat(
-        label = "circular reveal",
-        transitionSpec = { tween(300, 0, FastOutSlowInEasing) }
-    ) { enterExitState ->
-        when (enterExitState) {
+    val transitionSpec = tween<Float>(300, 0, FastOutSlowInEasing)
+    val radiusProgress by transition.animateFloat(label = "circular reveal", transitionSpec = { transitionSpec }) {
+        when (it) {
             EnterExitState.PreEnter -> 0.33f
             EnterExitState.Visible -> 1f
             EnterExitState.PostExit -> 1f
         }
     }
-    val alpha by transition.animateFloat(
-        label = "scale",
-        transitionSpec = { tween(300, 0, FastOutSlowInEasing) }
-    ) { enterExitState ->
-        when (enterExitState) {
+    val alpha by transition.animateFloat(label = "scale", transitionSpec = { transitionSpec }) {
+        when (it) {
             EnterExitState.PreEnter -> 1f
             EnterExitState.Visible -> 1f
             EnterExitState.PostExit -> 0f
         }
     }
-    val translationY by transition.animateFloat(
-        label = "translationY",
-        transitionSpec = { tween(300, 0, FastOutSlowInEasing) }
-    ) { enterExitState ->
-        when (enterExitState) {
+    val translationY by transition.animateFloat(label = "translationY", transitionSpec = { transitionSpec }) {
+        when (it) {
             EnterExitState.PreEnter -> LocalDensity.current.run { 16.dp.toPx() }
             EnterExitState.Visible -> 0f
             EnterExitState.PostExit -> 0f
