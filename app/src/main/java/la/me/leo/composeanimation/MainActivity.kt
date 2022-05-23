@@ -17,6 +17,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import la.me.leo.composeanimation.bottom_tabs.BottomTabScreen
+import la.me.leo.composeanimation.main.MainScreen
 import la.me.leo.composeanimation.ui.theme.ComposeTheme
 
 
@@ -48,7 +49,7 @@ class MainActivity : ComponentActivity() {
             ComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    BottomTabScreen()
+                    MainScreen()
                 }
             }
         }

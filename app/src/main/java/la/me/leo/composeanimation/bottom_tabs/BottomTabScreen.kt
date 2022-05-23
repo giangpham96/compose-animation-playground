@@ -9,7 +9,6 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -18,7 +17,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -44,10 +42,7 @@ import la.me.leo.composeanimation.ui.theme.surface8dp
 @Composable
 fun BottomTabScreen() {
     val navController = rememberAnimatedNavController()
-    Scaffold(
-        bottomBar = { BottomNavigationBar(navController = navController) },
-        modifier = Modifier.navigationBarsPadding()
-    ) {
+    Scaffold(bottomBar = { BottomNavigationBar(navController = navController) }) {
         NavigationGraph(navController = navController, contentPadding = it)
     }
 }
