@@ -2,7 +2,6 @@ package la.me.leo.composeanimation.bottom_tabs.discovery_list
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -12,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -47,13 +47,15 @@ fun DiscoveryHeader(modifier: Modifier, scrollY: Float, onSChanged: (Float) -> U
     var curveHeight by remember { mutableStateOf(0f) }
     val bgProgress = getComponentProgress(scrollY, p + s, p + s + t - LocalDensity.current.run { 8.dp.toPx() })
     val bgAlpha = ((1 - bgProgress) * 255).toInt()
-    ConstraintLayout(modifier.background(
-        brush = Brush.verticalGradient(
-            0f to Color(0xF8, 0x68, 0x00, bgAlpha),
-            0.7656f to Color(0xF0, 0x9E, 0x00, bgAlpha),
-            1f to Color(0xFF, 0xB8, 0x00, bgAlpha)
-        )
-    )) {
+    ConstraintLayout(
+        modifier.drawBehind {
+            drawRect(Brush.verticalGradient(
+                0f to Color(0xF8, 0x68, 0x00, bgAlpha),
+                0.7656f to Color(0xF0, 0x9E, 0x00, bgAlpha),
+                1f to Color(0xFF, 0xB8, 0x00, bgAlpha)
+            ))
+        }
+    ) {
         val (addressBar, cityState, curve) = createRefs()
         AddressBar(
             tintColor = MaterialTheme.colors.textPrimaryInverse,

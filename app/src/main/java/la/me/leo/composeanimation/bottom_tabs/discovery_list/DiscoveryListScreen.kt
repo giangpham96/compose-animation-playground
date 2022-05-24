@@ -1,6 +1,5 @@
 package la.me.leo.composeanimation.bottom_tabs.discovery_list
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
