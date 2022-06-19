@@ -16,7 +16,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import la.me.leo.composeanimation.bottom_tabs.BottomTabScreen
 import la.me.leo.composeanimation.main.MainScreen
 import la.me.leo.composeanimation.ui.theme.ComposeTheme
 

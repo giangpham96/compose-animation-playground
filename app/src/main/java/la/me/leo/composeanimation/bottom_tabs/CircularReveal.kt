@@ -1,6 +1,5 @@
 package la.me.leo.composeanimation.common
 
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
